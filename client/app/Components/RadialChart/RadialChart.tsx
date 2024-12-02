@@ -1,5 +1,4 @@
 "use client";
-
 import { TrendingUp } from "lucide-react";
 import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 
@@ -17,6 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useTasks } from "@/context/taskContext";
 
 export const description = "A radial chart with stacked sections";
 
@@ -31,21 +31,22 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function RadialChart() {
-  const tasksTotal = 100;
+function RadialCHart() {
+  const { tasks, completedTasks, activeTasks } = useTasks();
+  const tasksTotal = tasks.length;
 
   const chartData = [
     {
-      completed: 80,
-      pending: 20,
+      pending: activeTasks.length,
+      completed: completedTasks.length,
     },
   ];
 
   return (
     <Card className="flex flex-col border-2 border-white shadow-none bg-[#EDEDED]">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Completed Task vs Pending Task</CardTitle>
-        <CardDescription>Task Completion Status</CardDescription>
+        <CardTitle>Comleted vs Pending Tasks</CardTitle>
+        <CardDescription>Task completion status.</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
@@ -118,4 +119,4 @@ function RadialChart() {
   );
 }
 
-export default RadialChart;
+export default RadialCHart;

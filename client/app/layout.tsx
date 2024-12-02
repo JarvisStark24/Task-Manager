@@ -8,10 +8,10 @@ import Header from "./Components/Header/Header";
 import MainContentLayout from "@/providers/MainContentLayout";
 import SidebarProvider from "@/providers/SidebarProvider";
 import MainLayout from "@/providers/MainLayout";
+import GTMInitialiser from "@/providers/GTMInitialiser";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <link
+        <GTMInitialiser />
+        <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -41,7 +42,7 @@ export default function RootLayout({
 
           <div className="h-full flex overflow-hidden">
             <MiniSidebar />
-            <div className="flex-1 flex-col">
+            <div className="flex-1 flex flex-col">
               <Header />
               <MainContentLayout>
                 <MainLayout>{children}</MainLayout>

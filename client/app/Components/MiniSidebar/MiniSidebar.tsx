@@ -1,6 +1,6 @@
 "use client";
 
-import IconCheck from "@/public/icons/iconCheck";
+import IconCheck from "@/public/icons/IconCheck";
 import IconDeleteAll from "@/public/icons/IconDeleteAll";
 import IconFileCheck from "@/public/icons/IconFileCheck";
 import IconGrid from "@/public/icons/IconGrid";
