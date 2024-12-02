@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 
 import {
   Card,
@@ -10,34 +10,42 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-const chartData = [{ month: "january", desktop: 1260, mobile: 570 }]
+} from "@/components/ui/chart";
+
+export const description = "A radial chart with stacked sections";
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
+    label: "Completed",
+    color: "#8BCE89",
   },
   mobile: {
-    label: "Mobile",
-    color: "hsl(var(--chart-2))",
+    label: "Pending",
+    color: "#EB4E31",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
- function RadialChart() {
-  const totalVisitors = chartData[0].desktop + chartData[0].mobile
+function RadialChart() {
+  const tasksTotal = 100;
+
+  const chartData = [
+    {
+      completed: 80,
+      pending: 20,
+    },
+  ];
 
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col border-2 border-white shadow-none bg-[#EDEDED]">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Radial Chart - Stacked</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Completed Task vs Pending Task</CardTitle>
+        <CardDescription>Task Completion Status</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
@@ -65,30 +73,30 @@ const chartConfig = {
                           y={(viewBox.cy || 0) - 16}
                           className="fill-foreground text-2xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          {tasksTotal}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 4}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Tasks
                         </tspan>
                       </text>
-                    )
+                    );
                   }
                 }}
               />
             </PolarRadiusAxis>
             <RadialBar
-              dataKey="desktop"
+              dataKey="completed"
               stackId="a"
               cornerRadius={5}
               fill="var(--color-desktop)"
               className="stroke-transparent stroke-2"
             />
             <RadialBar
-              dataKey="mobile"
+              dataKey="pending"
               fill="var(--color-mobile)"
               stackId="a"
               cornerRadius={5}
@@ -99,14 +107,15 @@ const chartConfig = {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Task completion improved by 12% this month{" "}
+          <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Analysis based on tasks completed in the last 30 days.
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
 export default RadialChart;
